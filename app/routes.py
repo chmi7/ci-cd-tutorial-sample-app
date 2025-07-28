@@ -1,9 +1,7 @@
-from flask import json, jsonify
+from flask import jsonify
 from app import app
-from app import db
 from app.models import Menu
 
-# Home route (modified)
 @app.route('/')
 def home():
     return jsonify({
@@ -23,11 +21,10 @@ def menu():
         status = 404
     return jsonify(body), status
 
-# New status route (added)
 @app.route('/status')
 def status():
     return jsonify({
         "service": "CI/CD Tutorial App",
         "status": "running",
         "version": "1.0.1"
-    })    
+    })
