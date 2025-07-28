@@ -3,9 +3,14 @@ from app import app
 from app import db
 from app.models import Menu
 
+# Home route (modified)
 @app.route('/')
 def home():
-	return jsonify({ "status": "ok" })
+    return jsonify({
+        "status": "ok",
+        "message": "Welcome to the CI/CD Tutorial App!",
+        "available_endpoints": ["/", "/menu", "/status"]
+    })
 
 @app.route('/menu')
 def menu():
@@ -17,3 +22,12 @@ def menu():
         body = { "error": "Sorry, the service is not available today." }
         status = 404
     return jsonify(body), status
+
+# New status route (added)
+@app.route('/status')
+def status():
+    return jsonify({
+        "service": "CI/CD Tutorial App",
+        "status": "running",
+        "version": "1.0.1"
+    })    
